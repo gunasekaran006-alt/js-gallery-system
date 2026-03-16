@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Description" content="js-gallery-system">
+    <title>Build - JS Image Gallery System</title>
+
+    <style>
+        /* CSS for Styling */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+
+        .gallery-container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .image-box {
+            width: 500px;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #eee;
+        }
+
+        #gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .controls button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            margin: 0 10px;
+            transition: 0.3s;
+        }
+
+        .controls button:hover {
+            background-color: #555;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="gallery-container">
+        <h2>Simple Image Gallery</h2>
+        
+        <div class="image-box">
+            <!-- Starting Image -->
+            <img id="gallery-img" src="https://i.pinimg.com/736x/65/e1/a2/65e1a2e52a10c4e2a06b617460f88dff.jpg" alt="Gallery Image">
+        </div>
+
+        <div class="controls">
+            <button id="prevBtn">Previous</button>
+            <button id="nextBtn">Next</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript Logic
+        
+        // 1. Array of image URLs
+        const images = [
+            "https://i.pinimg.com/736x/31/d7/c0/31d7c09fdb7a8d415d0f9ad45bfbbd8e.jpg",
+            "https://i.pinimg.com/736x/2b/aa/d2/2baad2a8dc6ded7f030145ff79d407ac.jpg",
+            "https://i.pinimg.com/736x/d1/f4/af/d1f4af07c57586b267182ce8f73d3dd9.jpg",
+            "https://i.pinimg.com/1200x/70/e4/89/70e48900492c13be32d4977d25acbca5.jpg"
+        ];
+
+        let currentIndex = 0; // Tracks the current image
+
+        const imgElement = document.getElementById("gallery-img");
+        const nextBtn = document.getElementById("nextBtn");
+        const prevBtn = document.getElementById("prevBtn");
+
+        // 2. Function to update image
+        function updateImage() {
+            imgElement.src = images[currentIndex];
+        }
+
+        // 3. Next Button Click
+        nextBtn.addEventListener("click", () => {
+            currentIndex++;
+            if (currentIndex >= images.length) {
+                currentIndex = 0; // Loop back to the first image
+            }
+            updateImage();
+        });
+
+        // 4. Previous Button Click
+        prevBtn.addEventListener("click", () => {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1; // Loop back to the last image
+            }
+            updateImage();
+        });
+    </script>
+
+</body>
+</html>
